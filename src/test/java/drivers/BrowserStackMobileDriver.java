@@ -1,5 +1,7 @@
+package drivers;
+
 import com.codeborne.selenide.WebDriverProvider;
-import config.MobileConfig;
+import config.ConfigMobile;
 import io.appium.java_client.android.AndroidDriver;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +12,7 @@ import java.net.URL;
 
 public class BrowserStackMobileDriver implements WebDriverProvider {
 
-    static MobileConfig config = ConfigFactory.create(MobileConfig.class, System.getProperties());
+    static ConfigMobile config = ConfigFactory.create(ConfigMobile.class, System.getProperties());
 
     public static URL getBrowserstackUrl() {
         try {
@@ -18,6 +20,7 @@ public class BrowserStackMobileDriver implements WebDriverProvider {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
@@ -25,10 +28,11 @@ public class BrowserStackMobileDriver implements WebDriverProvider {
 
         // Set your access credentials
         desiredCapabilities.setCapability("browserstack.user", config.getBrowserStackUser());
-        desiredCapabilities.setCapability("browserstack.key", config.getBrowserStackKey());
+        desiredCapabilities.setCapability("browserstack.key", config.getBrowserStackPassword());
 
         System.out.println(config.getBrowserStackUser());
-        System.out.println(config.getBrowserStackKey());
+
+        System.out.println(config.getBrowserStackPassword());
         // Set URL of the application under test
         desiredCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
 
