@@ -15,7 +15,7 @@ public interface ConfigMobile extends Config {
     @Key("browserstack.user")
     String getBrowserStackUser();
 
-    @Key("browserstack.password")
+    @Key("browserstack.key")
     String getBrowserStackPassword();
 
 }
